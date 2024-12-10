@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from './dialog';
-import { ScrollArea } from './scroll-area';
 import { Button } from './button';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageGalleryProps {
   images: {

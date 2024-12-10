@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react';
-import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import Image from 'next/image';
@@ -80,7 +79,6 @@ const defaultWorkflows: Workflow[] = [
 ];
 
 export function ProjectsWorkflows() {
-  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<{path: string, description: string} | null>(null);
 
   const projectsData = defaultProjects;

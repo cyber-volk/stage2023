@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { useNavigation } from '@/contexts/NavigationContext'
-import { sections } from '@/app/page'
+import { sections } from '@/data/sections'
+import { Section } from '@/data/sections'
 
 interface SidebarContentProps {
   onClose: () => void;
@@ -22,7 +23,7 @@ export function SidebarContent({ onClose }: SidebarContentProps) {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">Contents</h2>
       </div>
       <nav className="space-y-1">
-        {sections.map((section) => (
+        {sections.map((section: Section) => (
           <button
             key={section.id}
             onClick={() => handleSectionClick(section.id)}

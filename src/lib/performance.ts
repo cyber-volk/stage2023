@@ -12,30 +12,30 @@ export const lazyLoadConfig = {
 }
 
 // Memoization helper for expensive computations
-export function memoize<T>(fn: (...args: any[]) => T): (...args: any[]) => T {
-  const cache = new Map()
+export function memoize<T>(fn: (...args: unknown[]) => T): (...args: unknown[]) => T {
+  const cache = new Map<string, T>();
   
-  return (...args: any[]) => {
-    const key = JSON.stringify(args)
+  return (...args: unknown[]) => {
+    const key = JSON.stringify(args);
     if (cache.has(key)) {
-      return cache.get(key)
+      return cache.get(key) as T;
     }
     
-    const result = fn(...args)
-    cache.set(key, result)
-    return result
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
   }
 }
 
 // Debounce helper for performance-intensive operations
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   ms: number
 ): (...args: Parameters<T>) => void {
-  let timeoutId: NodeJS.Timeout
+  let timeoutId: NodeJS.Timeout;
 
   return function (...args: Parameters<T>) {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), ms)
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), ms);
   }
 }

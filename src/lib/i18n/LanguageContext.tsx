@@ -1,69 +1,12 @@
 "use client"
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-interface TranslationType {
-  [key: string]: any;
-  content: {
-    welcome: {
-      title: string;
-      subtitle: string;
-      technology: {
-        title: string;
-        description: string;
-        features: string[];
-      };
-      overview: {
-        title: string;
-        description: string;
-      };
-      navigation: {
-        title: string;
-        description: string;
-        info: string;
-      };
-    };
-    introduction: {
-      title: string;
-      companyOverview: {
-        title: string;
-        description: string;
-        keyPoints: string[];
-      };
-      internshipGoals: {
-        title: string;
-        description: string;
-        objectives: string[];
-      };
-    };
-    skills: {
-      title: string;
-      technicalSkills: {
-        title: string;
-        description: string;
-        skills: Array<{ name: string; description: string; }>;
-      };
-      softSkills: {
-        title: string;
-        description: string;
-        skills: Array<{ name: string; description: string; }>;
-      };
-    };
-    challenges: {
-      title: string;
-      technicalChallenges: {
-        title: string;
-        challenges: Array<{ problem: string; solution: string; outcome: string; }>;
-      };
-      problemSolving: {
-        title: string;
-        steps: string[];
-      };
-    };
-  };
+interface TranslationContent {
+  [key: string]: string | TranslationContent | string[] | Array<{ [key: string]: string }>;
 }
 
-const translations: Record<string, TranslationType> = {
+const translations: Record<string, TranslationContent> = {
   en: {
     content: {
       welcome: {
@@ -261,20 +204,32 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const t = (key: string, namespace?: string): string | string[] => {
     const keys = key.split('.');
-    let translation: any = namespace 
-      ? translations[language][namespace] as Record<string, any>
-      : translations[language] as Record<string, any>;
+    let translation: TranslationContent | string | string[] | Array<{ [key: string]: string }> = namespace 
+      ? translations[language][namespace] as TranslationContent
+      : translations[language] as TranslationContent;
 
     // Traverse nested keys
     for (const k of keys) {
-      if (translation && typeof translation === 'object' && k in translation) {
+      if (translation && typeof translation === 'object' && !Array.isArray(translation) && k in translation) {
         translation = translation[k];
       } else {
         return `Missing translation: ${key}`;
       }
     }
 
-    return translation;
+    // Handle the case where translation is an array
+    if (Array.isArray(translation)) {
+      return translation.map(item => {
+        if (typeof item === 'string') {
+          return item;
+        } else if (typeof item === 'object') {
+          return JSON.stringify(item);
+        }
+        return '';
+      });
+    }
+
+    return translation as string;
   };
 
   return (

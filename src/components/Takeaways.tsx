@@ -31,6 +31,9 @@ export function Takeaways() {
             Appreciated the importance of balancing security measures with operational efficiency in large-scale IT environments.
           </li>
         </ul>
+        <p className="text-lg leading-relaxed text-gray-900 dark:text-gray-100">
+          This experience has taught me the importance of adaptability in IT environments. I&apos;ve learned to navigate challenges and leverage technology to drive solutions.
+        </p>
       </div>
     </div>
   )
