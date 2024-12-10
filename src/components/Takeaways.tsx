@@ -10,7 +10,7 @@ export function Takeaways() {
             Gained practical exposure to <span className="text-blue-800 dark:text-blue-300 font-medium">system administration</span> tasks in a virtualized environment, enhancing my understanding of enterprise IT infrastructure.
           </li>
           <li>
-            Developed a deeper understanding of <span className="text-blue-800 dark:text-blue-300 font-medium">cybersecurity threats</span> and response strategies, crucial in today's digital landscape.
+            Developed a deeper understanding of <span className="text-blue-800 dark:text-blue-300 font-medium">cybersecurity threats</span> and response strategies, crucial in today s digital landscape.
           </li>
           <li>
             Acquired basic proficiency in <span className="text-blue-800 dark:text-blue-300 font-medium">networking concepts</span> through hands-on simulation tools, bridging the gap between theory and practice.
@@ -32,7 +32,7 @@ export function Takeaways() {
           </li>
         </ul>
         <p className="text-lg leading-relaxed text-gray-900 dark:text-gray-100">
-          This experience has taught me the importance of adaptability in IT environments. I&apos;ve learned to navigate challenges and leverage technology to drive solutions.
+          This experience has taught me the importance of adaptability in IT environments. I have learned to navigate challenges and leverage technology to drive solutions.
         </p>
       </div>
     </div>

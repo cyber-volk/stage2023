@@ -20,7 +20,6 @@ import {
 import { NavItem } from "@/lib/navigation"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -114,7 +113,8 @@ SidebarProvider.displayName = "SidebarProvider"
 interface SidebarProps {
   items?: NavItem[]
   activeSection?: string
-  onSectionChange?: (section: string) => void
+  // Remove or comment out unused props
+  // onSectionChange?: (section: string) => void
   className?: string
   side?: "left" | "right"
   variant?: "sidebar" | "floating" | "inset"
@@ -129,29 +129,33 @@ const Sidebar = React.forwardRef<
     {
       items = [],
       activeSection,
-      onSectionChange,
+      // Remove or comment out unused props
+      // onSectionChange,
       side = "left",
       variant = "sidebar",
       collapsible = "offcanvas",
       className,
-      children,
+      // Remove or comment out unused children
+      // children,
       ...props
     },
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     const { t } = useLanguage()
-    const pathname = usePathname()
+    // Remove or comment out unused pathname
+    // const pathname = usePathname()
 
     const [expandedSections, setExpandedSections] = React.useState<string[]>([])
 
-    const toggleSection = (sectionId: string) => {
-      setExpandedSections((prev) =>
-        prev.includes(sectionId)
-          ? prev.filter((id) => id !== sectionId)
-          : [...prev, sectionId]
-      )
-    }
+    // Remove or comment out unused toggleSection
+    // const toggleSection = (sectionId: string) => {
+    //   setExpandedSections((prev) =>
+    //     prev.includes(sectionId)
+    //       ? prev.filter((id) => id !== sectionId)
+    //       : [...prev, sectionId]
+    //   )
+    // }
 
     const renderNavItem = (item: NavItem, level: number = 0) => {
       const isActive = activeSection === item.id
