@@ -59,9 +59,7 @@ const SidebarProvider = React.forwardRef<
       defaultOpen = true,
       open: openProp,
       onOpenChange: setOpenProp,
-      ...props
     },
-    ref
   ) => {
     const [openState, setOpenState] = React.useState(defaultOpen)
     const [openMobile, setOpenMobile] = React.useState(false)
@@ -146,21 +144,9 @@ const Sidebar = React.forwardRef<
     // Remove or comment out unused pathname
     // const pathname = usePathname()
 
-    const [expandedSections, setExpandedSections] = React.useState<string[]>([])
-
-    // Remove or comment out unused toggleSection
-    // const toggleSection = (sectionId: string) => {
-    //   setExpandedSections((prev) =>
-    //     prev.includes(sectionId)
-    //       ? prev.filter((id) => id !== sectionId)
-    //       : [...prev, sectionId]
-    //   )
-    // }
-
     const renderNavItem = (item: NavItem, level: number = 0) => {
       const isActive = activeSection === item.id
       const hasSubsections = item.subsections && item.subsections.length > 0
-      const isExpanded = expandedSections.includes(item.id)
 
       return (
         <div key={item.id} className={cn("space-y-1", level > 0 && "ml-4")}>
@@ -177,13 +163,12 @@ const Sidebar = React.forwardRef<
             {hasSubsections && (
               <ChevronDown
                 className={cn(
-                  "h-4 w-4 transition-transform",
-                  isExpanded && "transform rotate-180"
+                  "h-4 w-4 transition-transform"
                 )}
               />
             )}
           </Link>
-          {hasSubsections && isExpanded && (
+          {hasSubsections && (
             <div className="pt-1">
               {item.subsections!.map((subItem) => renderNavItem(subItem, level + 1))}
             </div>
@@ -241,6 +226,7 @@ const Sidebar = React.forwardRef<
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
         data-side={side}
+        {...props}
       >
         {/* This is what handles the sidebar gap on desktop */}
         <div
@@ -265,7 +251,6 @@ const Sidebar = React.forwardRef<
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
             className
           )}
-          {...props}
         >
           <div
             data-sidebar="sidebar"
