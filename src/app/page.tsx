@@ -14,7 +14,6 @@ import { ProjectsWorkflows } from '@/components/ProjectsWorkflows'
 import { AutomationScripts } from '@/components/AutomationScripts'
 import { Glossary } from '@/components/Glossary'
 import { useNavigation } from '@/contexts/NavigationContext'
-import { sections } from '@/data/sections'
 
 export default function InternshipReport() {
   const { activeSection } = useNavigation()
