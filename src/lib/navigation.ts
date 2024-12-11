@@ -2,10 +2,6 @@ export interface NavItem {
   id: string;
   title: string;
   href: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  disabled?: boolean;
-  external?: boolean;
-  label?: string;
   subsections?: NavItem[];
 }
 

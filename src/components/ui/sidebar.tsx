@@ -18,7 +18,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { NavItem } from "@/lib/navigation"
-import { useLanguage } from "@/lib/i18n/LanguageContext"
 import Link from "next/link"
 
 const SIDEBAR_WIDTH_MOBILE = "18rem"
@@ -140,9 +139,6 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
-    const { t } = useLanguage()
-    // Remove or comment out unused pathname
-    // const pathname = usePathname()
 
     const renderNavItem = (item: NavItem, level: number = 0) => {
       const isActive = activeSection === item.id
@@ -159,7 +155,7 @@ const Sidebar = React.forwardRef<
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-800"
             )}
           >
-            <span className="flex-1 text-left">{t(item.id)}</span>
+            <span className="flex-1 text-left">{item.title}</span>
             {hasSubsections && (
               <ChevronDown
                 className={cn(

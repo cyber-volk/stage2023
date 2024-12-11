@@ -1,51 +1,104 @@
 "use client"
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
-import { useLanguage } from "@/lib/i18n/LanguageContext"
+import * as React from "react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { navigation } from "@/lib/navigation"
+
 export function MobileNav() {
-  const { t } = useLanguage()
+  const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
-  const navigation = [
-    { name: t('navigation.introduction', 'content'), href: '/introduction' },
-    { name: t('navigation.skills', 'content'), href: '/skills' },
-    { name: t('navigation.challenges', 'content'), href: '/challenges' },
-    { name: t('navigation.projects', 'content'), href: '/projects' },
-    { name: t('navigation.conclusion', 'content'), href: '/conclusion' },
-  ]
-
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Toggle menu</span>
+        <Button
+          variant="ghost"
+          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+        >
+          <svg
+            strokeWidth="1.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+          >
+            <path
+              d="M3 5H11"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 12H16"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 19H21"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-        <nav className="flex flex-col space-y-4">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "block px-3 py-2 text-lg font-medium rounded-md transition-colors",
-                pathname === item.href
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-muted"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+      <SheetContent side="left" className="pr-0">
+        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
+          <div className="flex flex-col space-y-3">
+            {navigation.map(
+              (item) =>
+                item.href && (
+                  <MobileLink
+                    key={item.href}
+                    href={item.href}
+                    pathname={pathname}
+                    setOpen={setOpen}
+                  >
+                    {item.title}
+                  </MobileLink>
+                )
+            )}
+          </div>
+        </ScrollArea>
       </SheetContent>
     </Sheet>
+  )
+}
+
+interface MobileLinkProps {
+  children?: React.ReactNode
+  href: string
+  pathname: string
+  setOpen: (open: boolean) => void
+}
+
+function MobileLink({
+  children,
+  href,
+  pathname,
+  setOpen,
+}: MobileLinkProps) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "text-foreground/70 transition-colors hover:text-foreground",
+        pathname === href && "text-foreground"
+      )}
+      onClick={() => setOpen(false)}
+    >
+      {children}
+    </Link>
   )
 }
