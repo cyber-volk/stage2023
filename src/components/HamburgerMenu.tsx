@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { SidebarContent } from './SidebarContent';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -20,10 +22,14 @@ export function HamburgerMenu() {
     };
   }, []);
 
+  if (!isMobile) {
+    return null;
+  }
+
   return (
     <div className="relative" ref={menuRef}>
       <button
-        className="p-2 text-gray-700 dark:text-gray-300 focus:outline-none md:hidden"
+        className="p-2 text-gray-700 dark:text-gray-300 focus:outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg
@@ -42,11 +48,11 @@ export function HamburgerMenu() {
         </svg>
       </button>
 
-      {(isOpen || window.innerWidth >= 768) && (
-        <div className="absolute md:static top-0 left-0 w-full md:w-auto bg-white dark:bg-gray-900 shadow-lg z-50">
+      {isOpen && (
+        <div className="absolute top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-50">
           <SidebarContent onClose={() => setIsOpen(false)} />
         </div>
       )}
     </div>
   );
-} 
+}

@@ -53,7 +53,6 @@ export const translations = {
               "TypeScript and React implementation",
               "Tailwind CSS for responsive design",
               "Bilingual support (English/French) with context-based translations",
-              "PDF generation and viewing capabilities",
               "Responsive design for all device sizes"
             ],
             fr: [
@@ -61,7 +60,6 @@ export const translations = {
               "Implémentation avec TypeScript et React",
               "Tailwind CSS pour un design responsive",
               "Support bilingue (Anglais/Français) avec traductions contextuelles",
-              "Génération et visualisation de PDF",
               "Design responsive pour tous les formats d'écran"
             ]
           }
@@ -74,9 +72,6 @@ export const translations = {
           title: "How to Navigate",
           description: "Use the sidebar menu to explore different sections of the report.",
           info: "Navigate through the sections using the sidebar to learn about my journey, the skills I acquired, and the projects I worked on during this enriching experience."
-        },
-        pdf: {
-          view: "View PDF Version"
         },
         intro: "This report details my internship experience at Tunisie Telecom, where I gained valuable insights into system administration, networking, and automation in a governmental telecommunications environment."
       },
@@ -341,6 +336,9 @@ export const translations = {
       }
     },
     common: {
+      buttons: {
+        downloadPdf: "Download as PDF",
+      },
       theme: {
         light: {
           en: "Light",
@@ -404,7 +402,6 @@ export const translations = {
             "Implémentation avec TypeScript et React",
             "Tailwind CSS pour un design responsive",
             "Support bilingue (Anglais/Français) avec traductions contextuelles",
-            "Génération et visualisation de PDF",
             "Design responsive pour tous les formats d'écran"
           ]
         },
@@ -416,9 +413,6 @@ export const translations = {
           title: "Navigation",
           description: "Explorez facilement différentes sections de mon rapport",
           info: "Utilisez le menu de navigation pour accéder rapidement aux différentes sections."
-        },
-        pdf: {
-          view: "Voir le Rapport Complet"
         }
       },
       introduction: {
@@ -560,6 +554,9 @@ export const translations = {
       }
     },
     common: {
+      buttons: {
+        downloadPdf: "Télécharger en PDF",
+      },
       theme: {
         light: "Clair",
         dark: "Sombre"

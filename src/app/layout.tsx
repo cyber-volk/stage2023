@@ -4,6 +4,7 @@ import "./globals.css"
 import { Providers } from "@/components/providers"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { Header } from "@/components/Header"
+import { SidebarContent } from "@/components/SidebarContent"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,6 +24,9 @@ export default function RootLayout({
         <Providers>
           <SidebarProvider>
             <div className="flex h-screen w-full overflow-hidden">
+              <div className="hidden md:block">
+                <SidebarContent />
+              </div>
               <div className="flex-1 flex flex-col">
                 <Header />
                 <main className="flex-1 overflow-auto">

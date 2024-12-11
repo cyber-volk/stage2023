@@ -6,14 +6,25 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 import { Button } from './ui/button'
 import { MoonIcon, SunIcon, GlobeIcon } from '@radix-ui/react-icons'
 import { HamburgerMenu } from './HamburgerMenu'
+import { Download } from 'lucide-react'
 
 export function Header() {
   const { theme, setTheme } = useTheme()
-  const { language, setLanguage } = useLanguage()
+  const { language, setLanguage, t } = useLanguage()
   const [mounted, setMounted] = React.useState(false)
 
   // After mounting, we have access to the theme
   React.useEffect(() => setMounted(true), [])
+
+  const handleDownloadPDF = () => {
+    // The PDF file is in the public folder, so we can link to it directly
+    const link = document.createElement('a')
+    link.href = '/frenchpdf/Rapport_Stage_sep2023.pdf'
+    link.download = 'Rapport_Stage_sep2023.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   if (!mounted) {
     return null
@@ -38,6 +49,14 @@ export function Header() {
         <HamburgerMenu />
         <div className="ml-auto flex items-center space-x-4">
           <Button
+            variant="outline"
+            onClick={handleDownloadPDF}
+            className="flex items-center gap-2"
+          >
+            <Download className="h-4 w-4" />
+            <span>{t('common.buttons.downloadPdf')}</span>
+          </Button>
+          <Button
             variant="ghost"
             size="icon"
             onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}
@@ -53,4 +72,4 @@ export function Header() {
       </div>
     </div>
   )
-} 
+}
