@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { Header } from "@/components/Header"
 import { SidebarContent } from "@/components/SidebarContent"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -36,6 +37,7 @@ export default function RootLayout({
             </div>
           </SidebarProvider>
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   )
